@@ -187,7 +187,7 @@ def start():
         ciphers_collided = pg.sprite.spritecollide(player, ciphers, True)
         for cipher in ciphers_collided:
            score += 1
-        print(f"Score: {score}")
+        print(f"Cipher Machine Decoded: {score}")
 
         # Check for collisions between player and enemies
         enemies_collided = pg.sprite.spritecollide(player, enemies, False)
@@ -197,6 +197,9 @@ def start():
             for enemy in enemies_collided:
                 player.lives -= 1
                 print(int(player.lives))
+            
+            if player.lives < 0:
+                player.lives = 0
             
                 
         # If the player gets near the right side, shift the world left (-x)
@@ -218,7 +221,7 @@ def start():
             game_over = True
             display_message(screen, "You win! Press \"R\" to restart.")
         # Create a surface for the score
-        score_image = font.render(f"Score: {score}", True, BLACK)
+        score_image = font.render(f"Cipher Machine Decoded: {score}", True, BLACK)
 
         player.lives_image = font.render(f"Player Lives: {player.lives}", True, BLACK)
         # "Blit" the surface on the screen
